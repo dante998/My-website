@@ -6,34 +6,14 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>HOME</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<form action="/login" method="post" >
-    <div class="container">
-        <h1>HOME PAGE</h1>
-        <?php
-
-if (true) {
-    echo 'php here';
-    echo $_POST['data'];
-}
-
-?>
-        <label for="email"><b>email</b></label>
-        <input type="text" placeholder="Enter email name" name="email" id="email" required>
-
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-
-
-        <button type="submit" class="registerbtn">LOG IN</button>
-    </div>
-
-    <div class="container signin">
-        <p>You don't have an account? <a href="/register">Register here!</a></p>
-        <p>Would you like to add products? <a href ="/addProduct">Click here!</a></p>
-    </div>
-</form>
-
+<h1>header</h1>
+<div class="container signin">
+    <p>You already have an account? <a href="/login">Login here!</a></p>
+    <p>You don't have an account? <a href="/register">Register here!</a></p>
+    <p>Would you like to add products? <a href ="/addProduct">Click here!</a></p>
+</div>
 </body>
 </html>
