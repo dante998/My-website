@@ -2,6 +2,7 @@
 
 namespace controller;
 
+use model\Product;
 use model\User;
 use PDO;
 use services\db\Database;
@@ -9,6 +10,7 @@ use services\db\Database;
 class MainController {
 
 	public static function home() {
+		$_POST['data']= 'eheheheh';
 		return './views/home.html';
 	}
 
@@ -28,6 +30,21 @@ class MainController {
 
 		}
 	}
+
+	public static function add($data) {
+		$productName = $data['productName'] ?? '';
+		$productPrice = $data['productPrice'] ?? '';
+
+		$query = sprintf("SELECT * FROM products WHERE productName='%s'", $productName);
+		$result = Database::getInstance()->query($query)->fetch(PDO::FETCH_ASSOC);
+		if (!$result) {
+			$newUser = new Product($productName, $productPrice);
+			$newUser->addProduct();
+			return './views/successfullyAddProduct.html';
+
+		}
+	}
+
 
 	public static function login($data) {
 		// here the variables from the post request....

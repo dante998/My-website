@@ -11,7 +11,14 @@
 <form action="/login" method="post" >
     <div class="container">
         <h1>HOME PAGE</h1>
+        <?php
 
+if (true) {
+    echo 'php here';
+    echo $_POST['data'];
+}
+
+?>
         <label for="email"><b>email</b></label>
         <input type="text" placeholder="Enter email name" name="email" id="email" required>
 
@@ -24,6 +31,7 @@
 
     <div class="container signin">
         <p>You don't have an account? <a href="/register">Register here!</a></p>
+        <p>Would you like to add products? <a href ="/addProduct">Click here!</a></p>
     </div>
 </form>
 
