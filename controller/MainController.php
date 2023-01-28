@@ -66,9 +66,6 @@ class MainController {
 				$newUser->insertIntoDataBase();
 				header('Location: login');
 				exit();
-				//			return '/var/www/reworked_my-website/views/home.html';
-				//			return './views/successfullyRegister.html';
-
 			}
 		}
 
@@ -76,54 +73,22 @@ class MainController {
 		//		return NOTFOUND404;
 	}
 
-	public static function add($data) {
+	public static function product($method = 'GET' ,$data = []) {
+		if ($method === 'GET'){
+			return '/var/www/reworked_my-website/views/addProduct.html';
+		}
 		$productName = $data['productName'] ?? '';
 		$productPrice = $data['productPrice'] ?? '';
-
 		$query = sprintf("SELECT * FROM products WHERE productName='%s'",
 			$productName);
 		$result = Database::getInstance()->query($query)->fetch(PDO::FETCH_ASSOC);
 		if (!$result) {
 			$newUser = new Product($productName, $productPrice);
 			$newUser->addProduct();
-			return './views/successfullyAddProduct.html';
-
+			header('Location: /');
 		}
 	}
 
-
-	//	public static function login($data) {
-	//		// here the variables from the post request....
-	//		$password = $data['psw'] ?? '';
-	//		$email = $data['email'] ?? '';
-	//		if (empty($data) || !$email || !$password) {
-	//			return NOTFOUND404;
-	//		}
-	//		// check if user exist
-	//		$query = sprintf("SELECT * FROM users WHERE email='%s'", $email);
-	//		$result = Database::getInstance()->query($query)->fetch(PDO::FETCH_ASSOC);
-	//		if ($result) {
-	//			// this is the hashed password
-	//			$dataBaseStoredPassword = $result['password'];
-	//			if (password_verify($password, $dataBaseStoredPassword)) {
-	//				return '/var/www/reworked_my-website/views/login.html';
-	//			}
-	//			return 'wrong password';
-	//		}
-
-
-	//		$con = Database::getInstance();
-	//
-	//		$query = $con->query("select username,password from users where username = \"$user\"")
-	//			->fetch(PDO::FETCH_ASSOC);
-	//		if ($query['username'] === $user && $query['password'] === $password) {
-	//			echo ' heeeeeeyyy';
-	//		}
-	//		else {
-	//			echo ' false;;;.';
-	//		}
-
-	//	}public static function items() {
 	public static function items() {
 		session_start();
 		if ($_COOKIE['user']) {
@@ -135,17 +100,23 @@ class MainController {
 	}
 
 	public static function userHome() {
-//	 	$_SESSION['id']
 		return '/var/www/reworked_my-website/views/home_login.html';
 
 	}
 
 	public static function logout() {
-		session_start();
 		session_destroy();
 		unset($_COOKIE['user']);
 		header("Location: /");
 		exit();
+	}
+
+	public static function listAll() {
+		$query = sprintf("SELECT * FROM products");
+		$result = Database::getInstance()->query($query)->fetch(PDO::FETCH_ASSOC);
+		$a = 1;
+		$_GET['products'] = $result;
+		return  '/var/www/reworked_my-website/views/listItems.html';
 	}
 
 

@@ -23,22 +23,35 @@ switch ($requestMethod) {
 				break;
 			case '/register' :
 				$template = MainController::register();
+				break;
 			case '/userhome' :
 				$template = MainController::userHome();
+				break;
+			case '/addProduct' :
+				$template = MainController::product();
+				break;
+			case '/listAll' :
+				$template = MainController::listAll();
+				break;
 
 
 		}
 		break;
 	case 'POST':
 		switch ($requestPath) {
-			case '/login' :
+			case '/login':
 				$template = MainController::login($requestMethod, $_POST);
 				break;
-			case '/register' :
-				$template = MainController::register($requestMethod, $_POST);
+			case '/register':
+				 MainController::register($requestMethod, $_POST);
 				break;
-			case '/logout' :
+			case '/logout':
 				 MainController::logout();
+				 break;
+			case '/addProduct' :
+				 MainController::product($requestMethod, $_POST);
+				break;
 		}
+
 }
-require_once $template;
+return require_once $template;
